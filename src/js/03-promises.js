@@ -22,7 +22,7 @@ function dataProcessing(event) {
   let delay = Number(formData.step);
   let amount = Number(formData.amount);
 
-  for (let i = 0; i <= amount; i++) {
+  for (let i = 0; i < amount; i++) {
     setTimeout(createPromise(i + 1, delay * i + firstDelay), firstDelay);
   }
   event.currentTarget.reset();
