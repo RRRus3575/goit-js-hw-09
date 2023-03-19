@@ -2,7 +2,6 @@
 import throttle from 'lodash.throttle';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-console.log(3);
 const form = document.querySelector('.form');
 
 form.addEventListener('input', throttle(takeData, 500));
@@ -19,14 +18,9 @@ function takeData(event) {
 function dataProcessing(event) {
   event.preventDefault();
 
-  // const { delay, step, amount } = formData;
   let firstDelay = Number(formData.delay);
   let delay = Number(formData.step);
   let amount = Number(formData.amount);
-
-  // if ((formData = {})) {
-  //   return;
-  // }
 
   for (let i = 1; i <= amount; i++) {
     setTimeout(createPromise(i, delay * i + firstDelay), firstDelay);
