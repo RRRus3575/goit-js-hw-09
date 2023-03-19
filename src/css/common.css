@@ -29,11 +29,14 @@ img {
   height: 40px;
   border-radius: 5px;
 }
-.timer {
+.timer,
+form {
   margin-top: 50px;
   display: flex;
   gap: 25px;
   justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
 }
 .field {
   width: 90px;
@@ -50,6 +53,36 @@ img {
 .label {
   font-size: 20px;
 }
-.tasktwo {
+.task {
+  font-size: 17px;
+
+  color: #7900eb;
   background-color: #ceb7eb;
+}
+.task input {
+  height: 30px;
+  color: #5c0779;
+  font-size: 17px;
+  background-color: #be84eb;
+  border-radius: 5px;
+}
+.task button:enabled {
+  min-width: 75px;
+  height: 35px;
+  font-size: 17px;
+  color: #7900eb;
+  background-color: #be84eb;
+  border: #7900eb;
+  border-radius: 5px;
+}
+.task button:disabled {
+  width: 75px;
+  height: 35px;
+  color: #ffffff;
+  background-color: #cfb4eb;
+  border-radius: 5px;
+}
+.task button:enabled:hover {
+  color: #ffffff;
+  background-color: #8346eb;
 }
