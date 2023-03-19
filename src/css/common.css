@@ -29,3 +29,27 @@ img {
   height: 40px;
   border-radius: 5px;
 }
+.timer {
+  margin-top: 50px;
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+}
+.field {
+  width: 90px;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  color: #7900eb;
+  background-color: #be84eb;
+}
+.value {
+  display: block;
+  font-size: 45px;
+}
+.label {
+  font-size: 20px;
+}
+.tasktwo {
+  background-color: #ceb7eb;
+}
