@@ -22,8 +22,14 @@ function dataProcessing(event) {
   let delay = Number(formData.step);
   let amount = Number(formData.amount);
 
-  for (let i = 0; i < amount; i++) {
-    setTimeout(createPromise(i + 1, delay * i + firstDelay), firstDelay);
+  for (let i = 1; i <= amount; i++) {
+    createPromise(i, delay * i + firstDelay)
+      .then(value => {
+        Notify.success(value);
+      })
+      .catch(error => {
+        Notify.failure(error);
+      });
   }
   event.currentTarget.reset();
 }
@@ -33,17 +39,11 @@ function createPromise(position, delay) {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
       if (shouldResolve) {
-        resolve(`Fulfilled promise ${position} in ${delay}ms`);
+        resolve(` Fulfilled promise ${position} in ${delay}ms`);
       } else {
-        reject(`Rejected promise ${position} in ${delay}ms`);
+        reject(` Rejected promise ${position} in ${delay}ms`);
       }
     }, delay);
   });
-  promise
-    .then(value => {
-      Notify.success(value);
-    })
-    .catch(error => {
-      Notify.failure(error);
-    });
+  return promise;
 }

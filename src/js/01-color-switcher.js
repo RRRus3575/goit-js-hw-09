@@ -6,7 +6,7 @@ const body = document.querySelector('body');
 
 let activeBtn = false;
 let inetval = null;
-stopEl.setAttribute('disabled', 'disabled');
+addButtonStatus(stopEl);
 
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215)
@@ -18,9 +18,9 @@ startEl.addEventListener('click', () => {
   activeBtn = true;
 
   if (activeBtn) {
-    startEl.setAttribute('disabled', 'disabled');
+    addButtonStatus(startEl);
   }
-  stopEl.removeAttribute('disabled');
+  removeButtonStatus(stopEl);
   inetval = setInterval(changeColor, 1000);
 });
 stopEl.addEventListener('click', stopFunction);
@@ -37,8 +37,16 @@ function stopFunction() {
   if (!activeBtn) {
     return;
   }
-  stopEl.setAttribute('disabled', 'disabled');
-  startEl.removeAttribute('disabled');
+  addButtonStatus(stopEl);
+  removeButtonStatus(startEl);
+
   clearInterval(inetval);
   activeBtn = false;
+}
+
+function addButtonStatus(button) {
+  button.setAttribute('disabled', 'disabled');
+}
+function removeButtonStatus(button) {
+  button.removeAttribute('disabled');
 }

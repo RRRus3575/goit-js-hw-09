@@ -18,33 +18,38 @@ startEl.setAttribute('disabled', 'disabled');
 const options = {
   enableTime: true,
   time_24hr: true,
-  defaultDate: new Date(),
+  defaultDate: Date.now(),
   minuteIncrement: 1,
-  onClose(selectedDates) {
-    console.log(selectedDates[0]);
+  onClose([selectedDates]) {
+    console.log(selectedDates);
 
-    if (selectedDates[0] < new Date()) {
+    if (selectedDates < Date.now()) {
       Notify.failure('Please choose a date in the future');
     } else {
       startEl.removeAttribute('disabled');
-      startEl.addEventListener('click', () => {
-        timerValue(selectedDates[0]);
-      });
+      startEl.addEventListener('click', buttonClick);
     }
+    function buttonClick() {
+      timerValue(selectedDates);
+    }
+    startEl.EventListener('click', buttonClick);
   },
 };
 
 flatpickr(input, options);
 
-function timerValue(selectedDates) {
+function addValue(timerData) {
+  daysEl.textContent = addLeadingZero(timerData.days);
+  hoursEl.textContent = addLeadingZero(timerData.hours);
+  minutesEl.textContent = addLeadingZero(timerData.minutes);
+  secondsEl.textContent = addLeadingZero(timerData.seconds);
+}
+function timerValue() {
   let timer = setInterval(() => {
-    let difference = new Date(input.value) - new Date();
+    let difference = new Date(input.value) - Date.now();
     if (difference >= 0) {
       let timerData = convertMs(difference);
-      daysEl.textContent = timerData.days;
-      hoursEl.textContent = timerData.hours;
-      minutesEl.textContent = timerData.minutes;
-      secondsEl.textContent = timerData.seconds;
+      addValue(timerData);
     } else {
       clearInterval(timer);
     }
@@ -63,16 +68,13 @@ function convertMs(ms) {
   const day = hour * 24;
 
   // Remaining days
-  const days = addLeadingZero(Math.floor(ms / day));
+  const days = Math.floor(ms / day);
   // Remaining hours
-  const hours = addLeadingZero(Math.floor((ms % day) / hour));
+  const hours = Math.floor((ms % day) / hour);
   // Remaining minutes
-  const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
+  const minutes = Math.floor(((ms % day) % hour) / minute);
   // Remaining seconds
-  const seconds = addLeadingZero(
-    Math.floor((((ms % day) % hour) % minute) / second)
-  );
-
+  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
   return { days, hours, minutes, seconds };
 }
 
