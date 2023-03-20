@@ -29,9 +29,9 @@ function dataProcessing(event) {
       })
       .catch(error => {
         Notify.failure(error);
-      });
+      })
+      .finally(() => form.reset());
   }
-  event.currentTarget.reset();
 }
 
 function createPromise(position, delay) {
